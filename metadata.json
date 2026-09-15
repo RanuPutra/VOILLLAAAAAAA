@@ -1,0 +1,8 @@
+{
+  "name": "Remix OYLA",
+  "description": "Luxury handcrafted jewelry brand landing page featuring scroll-driven video scrubbing, horizontal product carousel with video reveal, and fixed footer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
