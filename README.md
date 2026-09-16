@@ -1,143 +1,151 @@
 # OYLA — Handcrafted Rings & Fine Jewelry
 
-> Landing page mewah untuk brand perhiasan artisanal **OYLA** (Berlin, est. 2019). Dibangun menggunakan arsitektur full-stack **Vite + Express + TypeScript**, ditenagai oleh animasi scroll interaktif dengan **GSAP ScrollTrigger**, serta teknik **cinematic video scrubbing** berperforma tinggi.
+An interactive landing page for OYLA, an artisanal handcrafted jewelry studio based in Berlin (est. 2019). The project combines a full-stack Node.js architecture (Vite + Express + TypeScript) with advanced scroll-driven animations powered by GSAP ScrollTrigger and frame-accurate video scrubbing.
 
 ---
 
-## ✨ Fitur Utama
+## Overview
 
-- **Scroll-Driven Video Scrubbing (Hero Section)**:
-  - Scrubbing video frame-by-frame yang sinkron dengan posisi scroll pengguna pada kontainer `500vh`.
-  - Menggunakan teknik **Interpolasi Lerp (`0.08`)** dan **`!video.seeking` guard** untuk mencegah bottleneck decoder pada browser.
-  - Per-character kinetic text animation yang memudar (fade, blur, translate) saat scroll mencapai progress 80%+.
-- **Horizontal Product Carousel with Video Reveal (Awards Section)**:
-  - Carousel produk horizontal (`33.333vw` per card) yang di-pin saat scroll berlangsung.
-  - Setelah carousel selesai ter-scroll, transisi simetris `.video-scaling-wrapper` membesar (`width: 0%` ke `100%`) mengungkap video scrubbing kedua di bawahnya.
-- **Two-Column Editorial & Stats Section**:
-  - Kolom kiri *sticky viewport* (`100vh`) dengan narasi filosofi brand dan capsule action button.
-  - Kolom kanan menampilkan 4 stat card dengan animasi teks bertingkat (*stomp stack*), character splitting, dan word-by-word reveal.
-- **Fixed Footer Reveal Pattern**:
-  - Footer fixed di bagian bawah (`z-index: 1`) yang terungkap secara elegan seiring konten utama di-scroll ke atas menggunakan `.footer-spacer` dinamis.
-- **High-Performance Video Delivery**:
-  - Video lokal teroptimasi dengan *frequent keyframes* (`g=4`, `faststart` atom), didukung HTTP 206 Partial Content (Byte-Range requests) oleh Express.
-  - Fallback otomatis ke CloudFront CDN dan Higgsfield Video Resolver API.
-- **Fully Responsive**:
-  - Layout adaptif untuk Desktop, Tablet, dan Mobile dengan penyesuaian font fluid (`clamp()`) dan safe touch targets (min 44px).
+OYLA showcases fine jewelry through a minimalist, editorial layout built with strict monochrome typography and a single crimson accent. The application architecture leverages a hybrid setup: Vite's Single Page Application middleware handles fast development on port 3000, while Express serves production assets and proxy endpoints for dynamic video resolution.
 
 ---
 
-## 🛠️ Tech Stack
+## Key Features
 
-- **Frontend**: HTML5, Vanilla JavaScript / TypeScript, React 19
-- **Animasi & Interaktivitas**: [GSAP 3.12.5](https://greensock.com/gsap/) & [ScrollTrigger](https://greensock.com/scrolltrigger/)
-- **Styling**: Tailwind CSS v4 & custom CSS variables
-- **Backend & Tooling**: [Express 4](https://expressjs.com/), [Vite 6](https://vitejs.dev/), [TypeScript 5.8](https://www.typescriptlang.org/), [tsx](https://github.com/privatenumber/tsx), [esbuild](https://esbuild.github.io/)
-- **Tipografi**: Instrument Serif, Inter Tight, Cormorant Garamond via Google Fonts
+### Scroll-Driven Video Scrubbing
+- Hero section spanning `500vh` to map user scroll distance directly to video playback progress.
+- Custom animation loop utilizing linear interpolation (`lerp: 0.08`) coupled with a strict decoder seeking guard (`!video.seeking`) to eliminate stutter and frame dropping.
+- Kinetic typographic exit animation at 80%+ scroll progress, splitting headings into individual characters that blur, elevate, and fade out.
 
----
+### Horizontal Product Carousel & Video Reveal
+- Pinned full-viewport (`100vh`) product track displaying six handcrafted rings across horizontal viewport units (`33.333vw` per card).
+- Multi-phase GSAP timeline: once horizontal translation reaches maximum scroll offset, a centered scaling wrapper (`0%` to `100%` width) expands symmetrically to reveal a second synchronized video scrub.
 
-## 🚀 Memulai (Quick Start)
+### Sticky Editorial & Metric Breakdown
+- Two-column layout with a pinned `100vh` sticky editorial column on the left detailing brand craftsmanship.
+- Scrollable right column with four stat modules featuring duplicate-heading vertical shifts ("stomp stacks") and staggered word-by-word reveal triggers.
 
-### Prasyarat
-Pastikan Anda telah menginstal:
-- [Node.js](https://nodejs.org/) (versi 18+ disarankan)
-- Package manager: `npm`, `yarn`, `pnpm`, atau `bun`
+### Fixed Reveal Footer
+- Fixed-position footer (`z-index: 1`) masked beneath the primary layout.
+- A dynamically calculated `.footer-spacer` element in the document flow creates an optical slide-over reveal as the user reaches the bottom of the page.
 
-### 1. Klon Repositori
-```bash
-git clone https://github.com/username-kamu/oyla-jewelry.git
-cd oyla-jewelry
-```
-
-### 2. Instalasi Dependensi
-```bash
-npm install
-```
-
-### 3. Konfigurasi Environment (Opsional)
-Salin file `.env.example` ke `.env`:
-```bash
-cp .env.example .env
-```
-
-### 4. Menjalankan Server Pengembangan (Dev)
-```bash
-npm run dev
-```
-Buka browser dan akses: `http://localhost:3000`
+### Optimized Asset Delivery
+- Keyframe-dense video encoding (`libx264`, `g=4`, `+faststart` atom) allowing immediate seeking across any timestamp.
+- Full support for HTTP 206 Partial Content (Byte-Range requests) served directly via Express static middleware.
+- Automatic CDN fallback mechanisms and proxy routes for external video resolution.
 
 ---
 
-## 📦 Build & Produksi
+## Tech Stack
 
-Untuk mengompilasi aplikasi ke dalam mode produksi:
+- **Frontend Core**: HTML5, Vanilla JavaScript, TypeScript, React 19
+- **Animation Framework**: GSAP 3.12.5 and ScrollTrigger Plugin
+- **Styling**: Tailwind CSS v4 and Custom CSS Properties
+- **Server Runtime**: Express 4, Node.js (ESM / CJS hybrid)
+- **Build Tooling**: Vite 6, tsx (development runner), esbuild (production server bundler)
+- **Typography**: Instrument Serif, Inter Tight, Cormorant Garamond
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18.0 or higher
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/oyla-jewelry.git
+   cd oyla-jewelry
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure environment variables (optional):
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Start the local development server:
+   ```bash
+   npm run dev
+   ```
+   The application will be accessible at `http://localhost:3000`.
+
+---
+
+## Production Build
+
+To compile both frontend and backend bundles for production deployment:
 
 ```bash
-# Compile frontend dengan Vite & bundle backend server dengan esbuild
+# Build the client via Vite and bundle server.ts into dist/server.cjs via esbuild
 npm run build
 
-# Menjalankan server produksi
+# Start the production server
 npm start
 ```
 
-Hasil build akan berada di direktori `dist/` dan backend server dibundel ke `dist/server.cjs`.
+---
+
+## Technical Details: Video Scrubbing Engine
+
+Standard HTML5 `<video>` scrubbing often fails during fast scroll gestures because browsers continuously fire seek requests before prior frames are rendered, leading to decoder starvation, blank canvases, and high CPU spikes.
+
+OYLA solves this with three complementary strategies:
+
+1. **Decoder Seeking Guard**:
+   ```javascript
+   heroCurrentTime += (heroTargetTime - heroCurrentTime) * 0.08;
+
+   const isSeeking = video.seeking && (performance.now() - lastSeekTime < 250);
+
+   if (!isSeeking && Math.abs(video.currentTime - heroCurrentTime) > 0.01) {
+     if (video.readyState >= 1) {
+       video.currentTime = heroCurrentTime;
+       lastSeekTime = performance.now();
+     }
+   }
+   ```
+2. **Dense Keyframe Intervals**: Media files are pre-processed with closed GOP structures and frequent I-frames (`-g 4`), ensuring the browser decoder does not need to reconstruct frames from distant reference packets.
+3. **Partial Content Range Requests**: Express serves media with `Accept-Ranges: bytes`, allowing browsers to fetch only required chunks for current timestamps.
 
 ---
 
-## 🔍 Detail Teknik Kunci: Video Scrubbing Performance
-
-Salah satu tantangan terbesar dalam video scrubbing berbasis scroll adalah **frame stuttering** dan **decoder flooding**. OYLA mengimplementasikan arsitektur scrubbing dengan prinsip:
-
-```javascript
-// Render loop di dalam requestAnimationFrame
-heroCurrentTime += (heroTargetTime - heroCurrentTime) * 0.08;
-
-// SEEKING GUARD: Hanya perbarui frame jika browser sudah selesai merender frame sebelumnya
-const isSeeking = video.seeking && (performance.now() - lastSeekTime < 250);
-
-if (!isSeeking && Math.abs(video.currentTime - heroCurrentTime) > 0.01) {
-  if (video.readyState >= 1) {
-    video.currentTime = heroCurrentTime;
-    lastSeekTime = performance.now();
-  }
-}
-```
-
-Manfaat pendekatan ini:
-1. **Mencegah Decoder Overload**: Browser tidak dipaksa melakukan seek saat proses decoding frame sebelumnya masih berlangsung.
-2. **Smooth Lerp (0.08)**: Transisi pergerakan video terasa sinematik dan luwes mengikuti inersia scrolling.
-3. **Keyframe-Dense Videos**: Video di-encode dengan interval I-frame pendek agar proses seek berlangsung instan tanpa menunggu inter-frame decoding yang lama.
-
----
-
-## 📁 Struktur Direktori
+## Project Structure
 
 ```text
-├── public/                 # Asset statis publik (video teroptimasi, poster gambar)
-│   ├── hero-poster.jpg     # Poster gambar awal hero section
-│   ├── hero-video-fast.mp4 # Video hero dengan keyframe rapat untuk scrubbing
-│   ├── reveal-poster.jpg   # Poster gambar awal awards reveal section
+├── public/                 # Static media assets and optimized video files
+│   ├── hero-poster.jpg     # Pre-rendered first frame poster for hero section
+│   ├── hero-video-fast.mp4 # Video encoded with dense keyframes for scrubbing
+│   ├── reveal-poster.jpg   # Poster image for awards section reveal
 │   └── reveal-video-fast.mp4
-├── src/                    # Komponen React & sumber TypeScript
-│   ├── App.tsx             # Entry component React
-│   ├── index.css           # Styling dasar Tailwind CSS v4
-│   └── main.tsx            # React root mounter
-├── index.html              # Entry point utama landing page & skrip GSAP
-├── server.ts               # Express server (proxy API, static file serving, Vite middleware)
-├── package.json            # Daftar dependensi & script runner
-├── tsconfig.json           # Konfigurasi TypeScript
-└── vite.config.ts          # Konfigurasi Vite
+├── src/                    # React application source
+│   ├── App.tsx             # Root component
+│   ├── index.css           # Global Tailwind CSS imports
+│   └── main.tsx            # Client mount point
+├── index.html              # Main application entry point and animation script
+├── server.ts               # Express server with Vite middleware and API endpoints
+├── package.json            # Project manifest, dependencies, and scripts
+├── tsconfig.json           # TypeScript configuration
+└── vite.config.ts          # Vite build configuration
 ```
 
 ---
 
-## 🔌 API Endpoint
+## API Reference
 
 ### `GET /api/higgsfield-video`
-Endpoint proxy untuk mengekstrak URL streaming direct MP4 dari halaman share Higgsfield AI.
+Extracts direct MP4 media streams from Higgsfield share URLs to bypass rate limits or broken preview wrappers.
 
-- **Query Param**: `?url=<higgsfield_share_url>` (opsional, default ke video hero OYLA)
-- **Response**:
+- **Query Parameters**:
+  - `url` (optional): The target Higgsfield share URL. Defaults to the primary hero media asset.
+- **Response Format**:
   ```json
   {
     "success": true,
@@ -147,6 +155,6 @@ Endpoint proxy untuk mengekstrak URL streaming direct MP4 dari halaman share Hig
 
 ---
 
-## 📄 Lisensi
+## License
 
-Proyek ini dibuat untuk keperluan demonstrasi dan portofolio. Aset desain dan fotografi merupakan hak cipta dari pemilik merek terkait.
+This project is released under the MIT License for educational and portfolio demonstration purposes. All brand imagery, ring designs, and trademarks are property of their respective owners.
